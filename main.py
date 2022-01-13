@@ -1,3 +1,7 @@
+# INGGRID RESMI BENITA (1301184107)
+# SASKIA PUTRI ANANDA (1301184157)
+# ANIS NOVITASARI (1301184424)
+
 # import library yang dibutuhkan
 import pandas as pd
 from bokeh.io import curdoc
@@ -6,7 +10,11 @@ from bokeh.models import ColumnDataSource, LinearColorMapper, ColorBar, BasicTic
 from bokeh.models import Slider, Select, Column, Row, Range
 from bokeh.transform import transform
 
-df = pd.read_csv("matriks_date_hour.csv") # Membaca data (Dataset ini adalah dataset hasil preprocesing menggunakan bahasa pemrogram R)
+# Filterisasi Dataset
+# https://colab.research.google.com/drive/1tuNR5SXDRrgFHnKpEmN4wiNn5vZSMxBt?usp=sharing
+
+# Membaca data (Dataset ini adalah dataset hasil preprocesing menggunakan bahasa pemrogram R)
+df = pd.read_csv("matriks_date_hour.csv") 
 df = df.set_index('hour')
 df.columns.name = "date"
 
@@ -17,22 +25,22 @@ source = ColumnDataSource(df_week)
 
 # Membuat mapper
 colors = [
-    "#ffffd3",
-    "#fbf6bf",
-    "#f8ecab",
-    "#f6e298",
-    "#f5d785",
-    "#f4cc72",
-    "#f5c060",
-    "#f5b44f",
-    "#f6a73f",
-    "#f7992f",
-    "#f98b1f",
-    "#fa7b10",
-    "#fc6a01",
-    "#fd5500",
-    "#fe3b00",
-    "#ff0000"
+    "#96f9e8",
+    "#8bece1",
+    "#80e0d9",
+    "#76d3d1",
+    "#6dc7c8",
+    "#65bbbf",
+    "#5daeb6",
+    "#56a2ac",
+    "#4f96a3",
+    "#498b99",
+    "#447f8e",
+    "#3e7384",
+    "#396879",
+    "#345d6e",
+    "#2f5263",
+    "#2a4858"
 ]
 mapper = LinearColorMapper(palette=colors, low=df_week.frequency.min(), high=df_week.frequency.max())
 
@@ -70,10 +78,12 @@ color_bar = ColorBar(
     color_mapper=mapper,
     ticker=BasicTicker(desired_num_ticks=16)
 )
-p.add_layout(color_bar, 'below')  # memposisikan color bar di bawah plot
+# memposisikan color bar di bawah plot
+p.add_layout(color_bar, 'below')
 
+# Mengambil nilai slider_week
 def update_plot(attr, old, new):
-    minggu_ke = slider_minggu.value  # Mengambil nilai slider_week
+    minggu_ke = slider_minggu.value 
     jenis = type_selector.value
 
     title = "Heatmap Transaksi Minggu ke-"+str(minggu_ke)
@@ -84,8 +94,9 @@ def update_plot(attr, old, new):
         dataset_file_name = dataset_file_name+"_"+jenis
 
     dataset_file_name = dataset_file_name + ".csv"
-
-    df = pd.read_csv(dataset_file_name)  # Membaca data (Dataset ini adalah dataset hasil preprocesing menggunakan bahasa pemrogram R)
+    
+    # Membaca data (Dataset ini adalah dataset hasil preprocesing menggunakan bahasa pemrogram R)
+    df = pd.read_csv(dataset_file_name)  
     df = df.set_index('hour')
     df.columns.name = "date"
 
@@ -133,7 +144,8 @@ def update_plot(attr, old, new):
         color_mapper=mapper,
         ticker=BasicTicker(desired_num_ticks=16)
     )
-    p_new.add_layout(color_bar, 'below')  # memposisikan color bar di bawah plot
+    # memposisikan color bar di bawah plot
+    p_new.add_layout(color_bar, 'below')  
 
     # Menghapus current plot dari tampilan, kemudian menampilkan plot baru
     rootLayout = curdoc().get_model_by_name('mainLayout')
@@ -144,7 +156,9 @@ def update_plot(attr, old, new):
 
 # Membuat slider week, ada 4 week yang dapat dipilih
 slider_minggu = Slider(start=1, end=4, step=1, value=1, title="Minggu ke-")
-slider_minggu.on_change('value', update_plot)  # menambahkan on change listener. Jika nilai slider berubah, maka program menjalankan fungsi update_plot
+
+# menambahkan on change listener. Jika nilai slider berubah, maka program menjalankan fungsi update_plot
+slider_minggu.on_change('value', update_plot)  
 
 # Membuat select untuk memilih tipe transaksi
 types = ["(Semua)", "Negative", "Positive"]
@@ -153,7 +167,11 @@ type_selector = Select(
     value='(Semua)',
     title='Tipe Transaksi'
 )
-type_selector.on_change('value', update_plot)  # menambahkan on change listener. Jika nilai select berubah, maka program menjalankan fungsi update_plot
+# menambahkan on change listener. Jika nilai select berubah, maka program menjalankan fungsi update_plot
+type_selector.on_change('value', update_plot)  
 
-layout = Row(Column(slider_minggu, type_selector), p, name='mainLayout')  # Membuat layout yang menampung slider, select dan heatmap
-curdoc().add_root(layout)  # Menampilkan layout
+# Membuat layout yang menampung slider, select dan heatmap
+layout = Row(Column(slider_minggu, type_selector), p, name='mainLayout')  
+
+# Menampilkan layout
+curdoc().add_root(layout)  
