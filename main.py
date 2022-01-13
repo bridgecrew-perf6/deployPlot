@@ -25,22 +25,22 @@ source = ColumnDataSource(df_week)
 
 # Membuat mapper
 colors = [
-    "#f99696",
-    "#ee8e9a",
-    "#e1889e",
-    "#d382a0",
-    "#c47da1",
-    "#b379a1",
-    "#a375a0",
-    "#92719c",
-    "#816d98",
-    "#706892",
-    "#61648a",
-    "#535f81",
-    "#465a78",
-    "#3a546e",
-    "#314e63",
-    "#2a4858"
+    "#f9eda4",
+    "#f9e7a3",
+    "#f9e1a2",
+    "#f9d6a0",
+    "#f9d09f",
+    "#f9ca9e",
+    "#f9c49d",
+    "#f9bf9d",
+    "#f9b99c",
+    "#f9b39b",
+    "#f9ad9a",
+    "#f9a799",
+    "#f9a298",
+    "#f9a298",
+    "#f99c97",
+    "#f99696"
 ]
 mapper = LinearColorMapper(palette=colors, low=df_week.frequency.min(), high=df_week.frequency.max())
 
