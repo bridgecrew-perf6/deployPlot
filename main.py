@@ -13,8 +13,8 @@ from bokeh.transform import transform
 # Filterisasi Dataset
 # https://colab.research.google.com/drive/1tuNR5SXDRrgFHnKpEmN4wiNn5vZSMxBt?usp=sharing
 
-# Membaca data (Dataset ini adalah dataset hasil preprocesing menggunakan bahasa pemrogram R)
-df = pd.read_csv("matriks_date_hour.csv") 
+# Membaca data (Dataset ini adalah dataset hasil filterasi)
+df = pd.read_csv("matriks_date_hour.csv")
 df = df.set_index('hour')
 df.columns.name = "date"
 
@@ -95,7 +95,7 @@ def update_plot(attr, old, new):
 
     dataset_file_name = dataset_file_name + ".csv"
     
-    # Membaca data (Dataset ini adalah dataset hasil preprocesing menggunakan bahasa pemrogram R)
+    # Membaca data (Dataset ini adalah dataset hasil preprocesing)
     df = pd.read_csv(dataset_file_name)  
     df = df.set_index('hour')
     df.columns.name = "date"
